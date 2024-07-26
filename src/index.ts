@@ -63,7 +63,10 @@ server.delete<{ Params: { id: string } }>(
 const start = async () => {
   try {
     const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
-    await server.listen({ port })
+    await server.listen({
+      host: "0.0.0.0",
+      port,
+    })
     server.log.info(`Server listening on http://localhost:${port}`)
   } catch (err) {
     server.log.error(err)
