@@ -1,4 +1,4 @@
-import { sql } from "../db.ts"
+import { sql } from "../db"
 
 // sql`DROP TABLE IF EXISTS videos`.then(() => {
 //   console.log("Drop table")

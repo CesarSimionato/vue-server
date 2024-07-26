@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto"
 
-import { VideoProps } from "./dtos/video.ts"
+import { VideoProps } from "./dtos/video"
 
 export class DatabaseMemory {
   #videos = new Map()

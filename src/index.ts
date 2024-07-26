@@ -1,5 +1,4 @@
 import fastify from "fastify"
-import cors from "@fastify/cors"
 
 import { VideoProps } from "./dtos/video"
 
@@ -7,10 +6,6 @@ import { VideoProps } from "./dtos/video"
 import { DatabasePostgres } from "./database-postgres"
 
 const server = fastify()
-
-await server.register(cors, {
-  origin: "*",
-})
 
 // const database = new DatabaseMemory()
 const database = new DatabasePostgres()
@@ -65,6 +60,15 @@ server.delete<{ Params: { id: string } }>(
   }
 )
 
-server.listen({ 
-  port: Number(process.env.PORT) ?? 3000,
- })
+const start = async () => {
+  try {
+    const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
+    await server.listen({ port })
+    server.log.info(`Server listening on http://localhost:${port}`)
+  } catch (err) {
+    server.log.error(err)
+    process.exit(1)
+  }
+}
+
+start()
