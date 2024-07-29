@@ -1,4 +1,5 @@
 import fastify from "fastify"
+import fastifyCors from "@fastify/cors"
 
 import { VideoProps } from "./dtos/video"
 
@@ -6,6 +7,10 @@ import { VideoProps } from "./dtos/video"
 import { DatabasePostgres } from "./database-postgres"
 
 const server = fastify()
+
+server.register(fastifyCors, {
+  origin: "*"
+})
 
 // const database = new DatabaseMemory()
 const database = new DatabasePostgres()
